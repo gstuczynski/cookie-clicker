@@ -26,7 +26,7 @@ class Achievements extends Component {
       <div className="achievements">
         <h1>ACHIEVEMENTS</h1>
         {_.times(ACHIEVS_PER_CATEGORY, idx => (
-          <div>
+          <div key={`achivments_${idx}`}>
             <LevelAchievement
               currentLevel={this.props.level}
               achievementLevel={LEVEL_STEPS_ACHIEVS[idx]}

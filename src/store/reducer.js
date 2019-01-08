@@ -33,10 +33,7 @@ const reducer = (state = initialState, action) => {
         clickerActive: nexlvl % 5 === 0
       };
     case "UPDATE_AVARAGE_CLICK_TIME":
-      console.log("xxxxx", state.maxAvarageClickTime, action.avarageClickTime);
-
       if (action.avarageClickTime > state.maxAvarageClickTime) {
-        console.log("aaa", state.maxAvarageClickTime, action.avarageClickTime);
         state.maxAvarageClickTime = action.avarageClickTime;
       }
       return {

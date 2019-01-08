@@ -1,0 +1,18 @@
+.achievements{
+  width: 50%;
+}
+
+.achievement{
+  display: flex;
+  height: 30px;
+  width: 100%;
+}
+
+.achievement img{
+  width: 30px
+}
+
+.achievement div{
+  height: 100%;
+  width: 100%;
+}

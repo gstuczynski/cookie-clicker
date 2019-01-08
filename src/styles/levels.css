@@ -1,0 +1,7 @@
+.levels{
+  width: 50%;
+}
+
+.currentLevel {
+  background-color: red !important;
+}

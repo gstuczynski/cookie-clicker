@@ -1,0 +1,8 @@
+.app {
+  display: flex;
+  flex-flow: column;
+}
+
+.dashboard{
+  display: flex
+}

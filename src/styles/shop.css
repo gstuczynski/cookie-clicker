@@ -1,0 +1,12 @@
+.shop {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+}
+
+.shop button {
+  width: 80%;
+  margin: 5px auto;
+
+}

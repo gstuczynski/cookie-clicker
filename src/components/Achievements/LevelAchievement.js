@@ -1,6 +1,6 @@
 import React from "react";
 import { number } from "prop-types";
-// import tick from "../../assets/tick.png";
+import tick from "../../assets/tick.png";
 
 const LevelAchievement = props => {
   const achievementLevel = props.achievementLevel;
@@ -9,7 +9,7 @@ const LevelAchievement = props => {
   const progressPercent = (currentLevel * 100) / achievementLevel;
   return (
     <div className="achievement">
-      {currentLevel >= achievementLevel &&  <div className="tick" >✔</div> /*<img src={tick} /> */ }
+      {currentLevel >= achievementLevel && <img src={tick} />}
       <div className="progress">
         <div
           className={"progress-bar"}

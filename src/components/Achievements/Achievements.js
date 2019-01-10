@@ -6,7 +6,7 @@ import _ from "underscore";
 import { connect } from "react-redux";
 import "../../styles/achievements.css";
 
-const CLICKSPEED_STEPS_ACHIEVS = [6, 15, 20, 30];
+const CLICKSPEED_STEPS_ACHIEVS = [1, 15, 20, 30];
 const LEVEL_STEPS_ACHIEVS = [5, 10, 20, 50];
 const ACHIEVS_PER_CATEGORY = 4;
 

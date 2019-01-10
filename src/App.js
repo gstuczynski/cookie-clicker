@@ -16,8 +16,9 @@ class App extends Component {
           <Shop />
           <Achievements />
         </div>
-
+        <div className="cookieWrapper">
         <Cookie />
+        </div>
       </div>
     );
   }

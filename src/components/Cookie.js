@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { func, number } from "prop-types";
 import { connect } from "react-redux";
+import { Animate } from "react-rebound";
+import _ from "underscore";
 import "../styles/cookie.css";
 
 class Cookie extends Component {
@@ -14,7 +16,8 @@ class Cookie extends Component {
     super(props);
     this.state = {
       elapsed: null,
-      cookieDisabled: true
+      cookieDisabled: true,
+      cookieClicked: false
     };
   }
 
@@ -23,6 +26,7 @@ class Cookie extends Component {
   }
 
   onCookieClick = () => {
+    this.setState({ cookieClicked: true });
     this.props.onIncreasePoints(this.props.clickValue);
   };
 
@@ -32,7 +36,10 @@ class Cookie extends Component {
   };
 
   tick = () => {
-    this.setState({ elapsed: new Date() - this.state.start });
+    this.setState({
+      elapsed: new Date() - this.state.start,
+      cookieClicked: false
+    });
   };
 
   render() {
@@ -44,6 +51,9 @@ class Cookie extends Component {
     // if (seconds > 0 && seconds % 10 === 0) {
     //   this.props.updateAvarageClickTime(this.props.points / seconds);
     // }
+
+    let numberOfSmallCookie =
+      pointGainSpeed.toFixed(0) < 10 ? pointGainSpeed.toFixed(0) - 2 : 10;
 
     return (
       <div className="cookie">
@@ -58,7 +68,25 @@ class Cookie extends Component {
           disabled={this.state.cookieDisabled}
           className="cookieButton"
           onClick={this.onCookieClick}
-        />
+        >
+          {_.times(numberOfSmallCookie, () => {
+            return (
+              <Animate
+                translateX={
+                  this.state.cookieClicked ? Math.floor(Math.random() * 200) : 0
+                }
+                translateY={
+                  this.state.cookieClicked ? Math.floor(Math.random() * 200) : 0
+                }
+                tension={100}
+                friction={10}
+                delay={0}
+              >
+                <div className="smallCookie" />
+              </Animate>
+            );
+          })}
+        </button>
       </div>
     );
   }

@@ -51,6 +51,11 @@ const reducer = (state = initialState, action) => {
         clickValue: state.clickValue + 1,
         morePointPerClickActive: false
       };
+    case "DECREASE_POINTS":
+      return {
+        ...state,
+        points: state.points + action.pointsDec
+      };
     default:
       return state;
   }

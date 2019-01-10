@@ -8,5 +8,9 @@
 .shop button {
   width: 80%;
   margin: 5px auto;
+}
 
+.shop button img {
+  height: 40px;
+  margin-left: 50px;
 }

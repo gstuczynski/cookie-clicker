@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Cookie from "./components/Cookie";
 import Achievements from "./components/Achievements/Achievements";
 import Stats from "./components/Stats";
-import Shop from "./components/Shop";
+import Shop from "./components/Shop/Shop";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/app.css";
@@ -17,7 +17,7 @@ class App extends Component {
           <Achievements />
         </div>
         <div className="cookieWrapper">
-        <Cookie />
+          <Cookie />
         </div>
       </div>
     );

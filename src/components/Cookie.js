@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { func, number } from "prop-types";
+import { func, number, instanceOf, string } from "prop-types";
 import { connect } from "react-redux";
-import { Animate } from "react-rebound";
+import * as actionTypes from "../store/actionTypes";
 import _ from "underscore";
 import "../styles/cookie.css";
 
@@ -9,16 +9,32 @@ class Cookie extends Component {
   static propTypes = {
     onIncreasePoints: func.isRequired,
     points: number.isRequired,
-    clickValue: number.isRequired
+    clickValue: number.isRequired,
+    saveStartGameTime: func.isRequired,
+    startGameTime: string, // instanceOf(Date),
+    clearStorage: func.isRequired
+  };
+
+  static defaultProps = {
+    startGameTime: null
   };
 
   constructor(props) {
     super(props);
-    this.state = {
-      elapsed: null,
+
+    let state = {
+      elapsed: 0,
       cookieDisabled: true,
       cookieClicked: false
     };
+
+    if (this.props.startGameTime) {
+      state.cookieDisabled = false;
+      state.elapsed = new Date() - new Date(this.props.startGameTime);
+      this.timer = setInterval(this.tick, 50);
+    }
+
+    this.state = state;
   }
 
   componentWillUnmount() {
@@ -31,29 +47,39 @@ class Cookie extends Component {
   };
 
   onStartGame = () => {
-    this.setState({ start: new Date(), cookieDisabled: false });
+    this.setState({
+      cookieDisabled: false
+    });
     this.timer = setInterval(this.tick, 50);
+    this.props.saveStartGameTime(new Date());
   };
 
   tick = () => {
     this.setState({
-      elapsed: new Date() - this.state.start,
-      cookieClicked: false
+      elapsed: new Date() - new Date(this.props.startGameTime)
     });
   };
 
+  onFinishGame = () => {
+    this.props.clearStorage();
+    clearInterval(this.timer);
+    this.setState({ elapsed: 0, cookieDisabled: true });
+  };
+
   render() {
-    let elapsed = Math.round(this.state.elapsed / 100);
-    let seconds = (elapsed / 10).toFixed(1);
-    let pointGainSpeed = this.props.points / seconds || 0;
+    let pointGainSpeed = 0;
+    let seconds = 0;
+
+    if (this.state.elapsed) {
+      let elapsed = Math.round(this.state.elapsed / 100);
+      seconds = (elapsed / 10).toFixed(1);
+      pointGainSpeed = (seconds ? this.props.points / seconds : 0).toFixed(1);
+    }
     // I'm not sure if update global state that often is good idea - will testing.
-    this.props.updateAvarageClickTime(pointGainSpeed.toFixed(1));
+    this.props.updateAvarageClickTime(pointGainSpeed);
     // if (seconds > 0 && seconds % 10 === 0) {
     //   this.props.updateAvarageClickTime(this.props.points / seconds);
     // }
-
-    let numberOfSmallCookie =
-      pointGainSpeed.toFixed(0) < 10 ? pointGainSpeed.toFixed(0) - 2 : 10;
 
     return (
       <div className="cookie">
@@ -61,32 +87,18 @@ class Cookie extends Component {
         <button
           disabled={!this.state.cookieDisabled}
           onClick={this.onStartGame}
+          className="btn btn-success"
         >
           Start Game
+        </button>
+        <button onClick={this.onFinishGame} className="btn btn-danger">
+          Finish Game
         </button>
         <button
           disabled={this.state.cookieDisabled}
           className="cookieButton"
           onClick={this.onCookieClick}
-        >
-          {_.times(numberOfSmallCookie, () => {
-            return (
-              <Animate
-                translateX={
-                  this.state.cookieClicked ? Math.floor(Math.random() * 200) : 0
-                }
-                translateY={
-                  this.state.cookieClicked ? Math.floor(Math.random() * 200) : 0
-                }
-                tension={100}
-                friction={10}
-                delay={0}
-              >
-                <div className="smallCookie" />
-              </Animate>
-            );
-          })}
-        </button>
+        />
       </div>
     );
   }
@@ -96,16 +108,23 @@ const mapStateToProps = state => {
   return {
     points: state.points,
     avarageClickTime: state.avarageClickTime,
-    clickValue: state.clickValue
+    clickValue: state.clickValue,
+    startGameTime: state.startGameTime
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onIncreasePoints: clickValue =>
-      dispatch({ type: "INCREASE_POINTS", clickValue }),
+      dispatch({ type: actionTypes.INCREASE_POINTS, clickValue }),
     updateAvarageClickTime: avarageClickTime =>
-      dispatch({ type: "UPDATE_AVARAGE_CLICK_TIME", avarageClickTime })
+      dispatch({
+        type: actionTypes.UPDATE_AVARAGE_CLICK_TIME,
+        avarageClickTime
+      }),
+    saveStartGameTime: startGameTime =>
+      dispatch({ type: actionTypes.SAVE_START_GAME_TIME, startGameTime }),
+    clearStorage: () => dispatch({ type: actionTypes.CLEAR_STORAGE })
   };
 };
 

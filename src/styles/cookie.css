@@ -10,7 +10,7 @@
 
 .cookieButton {
   background: url("../assets/cookie.png");
-  background-size: contain;
+  background-size: cover;
   width: 300px;
   height: 300px;
   border: none;
@@ -23,10 +23,21 @@
   height: 350px;
 }
 
+.cookieButton:active {
+  width: 350px;
+  height: 350px;
+  animation: cookie-click 1s;
+}
+
 .smallCookie {
   background: url("../assets/cookie.png");
   background-size: contain;
   width: 40px;
   height: 40px;
   margin: 0 auto;
+}
+
+@keyframes cookie-click {
+  0%   {width: 290px; height: 290px;}
+  100% {width: 310px; height: 310px;}
 }

@@ -1,3 +1,5 @@
+import * as actionTypes from "./actionTypes";
+
 const initialState = {
   points: 0,
   level: 0,
@@ -6,12 +8,14 @@ const initialState = {
   maxAvarageClickTime: 0,
   clickValue: 1,
   clickerActive: false,
-  morePointPerClickActive: false
+  morePointPerClickActive: false,
+  startGameTime: null,
+  permanentClickerValue: 0
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "INCREASE_POINTS":
+    case actionTypes.INCREASE_POINTS:
       if ((state.points + 1) % 100 === 0 && state.points > 0) {
         state.morePointPerClickActive = true;
       }
@@ -24,15 +28,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         points: state.points + (action.clickValue || 1)
       };
-    case "UPDATE_LEVEL":
-      const nexlvl = state.level + 1;
-      return {
-        ...state,
-        level: nexlvl,
-        nextLevelStep: state.nextLevelStep * 2,
-        clickerActive: nexlvl % 5 === 0
-      };
-    case "UPDATE_AVARAGE_CLICK_TIME":
+    case actionTypes.UPDATE_AVARAGE_CLICK_TIME:
       if (action.avarageClickTime > state.maxAvarageClickTime) {
         state.maxAvarageClickTime = action.avarageClickTime;
       }
@@ -40,22 +36,34 @@ const reducer = (state = initialState, action) => {
         ...state,
         avarageClickTime: action.avarageClickTime
       };
-    case "LOCK_BONUS":
+    case actionTypes.LOCK_BONUS:
       return {
         ...state,
         [action.name]: false
       };
-    case "INCREASE_CLICK_VALUE":
+    case actionTypes.INCREASE_CLICK_VALUE:
       return {
         ...state,
         clickValue: state.clickValue + 1,
         morePointPerClickActive: false
       };
-    case "DECREASE_POINTS":
+    case actionTypes.DECREASE_POINTS:
       return {
         ...state,
-        points: state.points + action.pointsDec
+        points: state.points - action.pointsDec
       };
+    case actionTypes.SAVE_START_GAME_TIME:
+      return {
+        ...state,
+        startGameTime: action.startGameTime
+      };
+    case actionTypes.INCREASE_PERMANENT_CLICKER_VALUE:
+      return {
+        ...state,
+        permanentClickerValue: state.permanentClickerValue + 1
+      };
+    case actionTypes.CLEAR_STORAGE:
+      return initialState;
     default:
       return state;
   }

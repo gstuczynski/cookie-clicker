@@ -1,6 +1,7 @@
 import React from "react";
 import { number } from "prop-types";
 import { connect } from "react-redux";
+import * as actionTypes from "../store/actionTypes";
 import "../styles/stats.css";
 
 const Stats = ({
@@ -15,7 +16,7 @@ const Stats = ({
     <ul className="list-group">
       <li className="list-group-item">Points: {points}</li>
       <li className="list-group-item">
-        Total avarage point gained time: {avarageClickTime}
+        Current avarage point gained time: {avarageClickTime}
       </li>
       <li className="list-group-item">Level: {level}</li>
       <li className="list-group-item">Points per click: {clickValue}</li>
@@ -46,7 +47,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onIncreasePoints: () => dispatch({ type: "INCREASE_POINTS" })
+    onIncreasePoints: () => dispatch({ type: actionTypes.INCREASE_POINTS })
   };
 };
 

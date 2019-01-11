@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { func, number } from "prop-types";
 import LevelAchievement from "./LevelAchievement";
 import ClickSpeedAchievement from "./ClickSpeedAchievement";
+import * as actionTypes from "../../store/actionTypes";
 import _ from "underscore";
 import { connect } from "react-redux";
 import "../../styles/achievements.css";
@@ -52,7 +53,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onIncreasePoints: () => dispatch({ type: "INCREASE_POINTS" })
+    onIncreasePoints: () => dispatch({ type: actionTypes.INCREASE_POINTS })
   };
 };
 

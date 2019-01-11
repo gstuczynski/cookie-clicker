@@ -29,9 +29,12 @@
 }
 
 .achievementInfo {
-  animation: achievementUnlocked 4s infinite;
+  animation: achievementUnlocked 4s;
   position: fixed;
-  right: calc(50% - 50px);
+  width: 400px;
+  max-height: 300px;
+  bottom: 80vh;
+  right: calc(50% - 200px);
 }
 
 .achievementInfo p{

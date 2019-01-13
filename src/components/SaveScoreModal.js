@@ -4,7 +4,7 @@ import axios from "axios";
 import config from "../config.json";
 import { func, bool, number, shape, string } from "prop-types";
 
-const BACKEND_URL = `${config.backend_url}/panteon`;
+const BACKEND_URL = `${config.backend_url}/save-score`;
 
 const customStyles = {
   content: {

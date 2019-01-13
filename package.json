@@ -2,6 +2,7 @@
   "name": "cookie-clicker",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://gstuczynski.pl/cookie-clicker",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",

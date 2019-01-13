@@ -21,7 +21,7 @@ const inputNameRef = React.createRef();
 
 const SaveScore = (evt, score, onClose) => {
   evt.preventDefault();
-  score.nick = inputNameRef.current.value;
+  score["nick"] = inputNameRef.current.value;
   axios.post(BACKEND_URL, { score }).catch(err => alert(err));
   onClose();
 };

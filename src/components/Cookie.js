@@ -125,6 +125,7 @@ class Cookie extends Component {
             onSave={this.onFinishGame}
             onClose={() => this.setState({ saveScoreModalIsOpen: false })}
             score={{
+              nick: "",
               level: level,
               points: points,
               avgPointsGainedOnFinish: avarageClickTime,

@@ -2,6 +2,7 @@ import React from "react";
 import { bool, number, func } from "prop-types";
 import locked from "../../assets/locked.png";
 import unlocked from "../../assets/unlocked.png";
+import { string } from "postcss-selector-parser";
 
 const ClickerBonus = ({ active, text, onClick, cost }) => (
   <button disabled={!active} onClick={onClick} className="btn btn-primary">
@@ -16,7 +17,8 @@ ClickerBonus.propTypes = {
   timeLeft: number,
   value: number,
   onClick: func,
-  cost: number
+  cost: number,
+  text: string
 };
 
 export default ClickerBonus;

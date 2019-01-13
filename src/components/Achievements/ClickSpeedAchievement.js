@@ -41,11 +41,13 @@ class ClickSpeedAchievement extends Component {
     return (
       <div className="achievement">
         {achievementUnlocked && <img src={tick} />}
-        {achievementUnlocked && this.state.showInfoTime && !this.state.unlocked > 0 && (
-          <AchievementInfo
-            msg={`Achievement ${maxAvarageClickTime} points per sec Unlocked`}
-          />
-        )}
+        {achievementUnlocked &&
+          this.state.showInfoTime &&
+          !this.state.unlocked > 0 && (
+            <AchievementInfo
+              msg={`Achievement ${maxAvarageClickTime} points per sec Unlocked`}
+            />
+          )}
         <div className="btn btn-secondary">
           Avarage speed: {clickSpeedAchiev} points per 1s
         </div>

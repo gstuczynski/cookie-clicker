@@ -16,6 +16,7 @@
     flex-flow: column
   }
   .gameboard{
+    flex-flow: column;
     order: -1
   }
 }

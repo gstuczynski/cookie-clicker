@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import _ from "underscore";
 import axios from "axios";
 import { MDBDataTable } from "mdbreact";
+import config from "../config.json";
 import "../styles/panteon.css";
 
-const BACKEND_URL = "http://localhost:3001";
+const BACKEND_URL = config.backend_url;
 
 class Panteon extends Component {
   constructor() {
@@ -20,7 +20,6 @@ class Panteon extends Component {
       })
     );
   }
-
 
   render() {
     const data = {
@@ -58,7 +57,9 @@ class Panteon extends Component {
       ],
       rows: this.state.scores
     };
-    return <MDBDataTable striped bordered hover data={data} />;
+    return (
+      <MDBDataTable striped bordered hover data={data} className="panteon" />
+    );
   }
 }
 

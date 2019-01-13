@@ -15,7 +15,8 @@ class Achievements extends Component {
   static propTypes = {
     onIncreasePoints: func.isRequired,
     points: number.isRequired,
-    level: number.isRequired
+    level: number.isRequired,
+    maxAvarageClickTime: number.isRequired
   };
 
   onCookieClick = () => {

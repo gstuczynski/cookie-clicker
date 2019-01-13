@@ -1,8 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import axios from "axios";
-import { func, bool, number, shape } from "prop-types";
-import { string } from "postcss-selector-parser";
+import { func, bool, number, shape, string } from "prop-types";
 
 const BACKEND_URL = "http://localhost:3001/save-score";
 
@@ -26,12 +25,20 @@ const SaveScore = (evt, score, onClose) => {
   onClose();
 };
 
-const SaveScoreModal = ({ isOpen, onClose, score }) => (
-  <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-    <h2>Hello</h2>
-    <button onClick={onClose}>close</button>
-    <div>I am a modal</div>
-    <form onSubmit={evt => SaveScore(evt, score, onClose)}>
+const SaveScoreModal = ({ isOpen, onClose, onSave, score }) => (
+  <Modal isOpen={isOpen} style={customStyles}>
+    <button
+      type="button"
+      className="close"
+      aria-label="Close"
+      onClick={onClose}
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+    <h3>Save your score</h3>
+    <form onSubmit={evt => SaveScore(evt, score, onSave)}>
+      <p>Type your nick:</p>
       <input ref={inputNameRef} />
       <button type="submit">Save</button>
     </form>
@@ -41,6 +48,7 @@ const SaveScoreModal = ({ isOpen, onClose, score }) => (
 SaveScoreModal.propTypes = {
   isOpen: bool.isRequired,
   onClose: func.isRequired,
+  onSave: func.isRequired,
   score: shape({
     level: string,
     points: number,

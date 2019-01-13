@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { func, number, instanceOf, string } from "prop-types";
+import { func, number, string } from "prop-types";
 import { connect } from "react-redux";
-import _ from "underscore";
 import SaveScoreModal from "./SaveScoreModal";
 import * as actionTypes from "../store/actionTypes";
 import "../styles/cookie.css";
@@ -12,7 +11,7 @@ class Cookie extends Component {
     points: number.isRequired,
     clickValue: number.isRequired,
     saveStartGameTime: func.isRequired,
-    startGameTime: string, // instanceOf(Date),
+    startGameTime: string,
     clearStorage: func.isRequired,
     level: number.isRequired,
     updateAvarageClickTime: func.isRequired,
@@ -57,7 +56,7 @@ class Cookie extends Component {
       cookieDisabled: false
     });
     this.timer = setInterval(this.tick, 50);
-    this.props.saveStartGameTime(new Date());
+    this.props.saveStartGameTime(new Date().toString());
   };
 
   tick = () => {
@@ -93,7 +92,7 @@ class Cookie extends Component {
       pointGainSpeed = (seconds ? points / seconds : 0).toFixed(1);
     }
     // I'm not sure if update global state that often is good idea - will testing.
-    updateAvarageClickTime(pointGainSpeed);
+    updateAvarageClickTime(parseFloat(pointGainSpeed));
     // if (seconds > 0 && seconds % 10 === 0) {
     //   this.props.updateAvarageClickTime(this.props.points / seconds);
     // }
@@ -123,7 +122,8 @@ class Cookie extends Component {
         {this.state.saveScoreModalIsOpen && (
           <SaveScoreModal
             isOpen={this.state.saveScoreModalIsOpen}
-            onClose={this.onFinishGame}
+            onSave={this.onFinishGame}
+            onClose={() => this.setState({ saveScoreModalIsOpen: false })}
             score={{
               level: level,
               points: points,

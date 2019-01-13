@@ -74,9 +74,9 @@ class Shop extends Component {
           <ClickerBonus
             active={this.props.clickerActive && this.props.points > 100}
             onClick={this.startAutoClicker}
-            text={`Adding ${this.state.autoClickerValue} point per ${
-              this.state.stopAutoClicker
-            }s`}
+            text={`On minute of additional ${
+              this.state.autoClickerValue
+            } point per sec. Left: ${this.state.stopAutoClicker}s`}
             cost={100}
           />
         </div>
@@ -96,7 +96,7 @@ class Shop extends Component {
           <ClickerBonus
             active={this.props.clickerActive && this.props.points > 1000}
             onClick={this.startPermanentAutoClicker}
-            text={`Permanent adding ${
+            text={`Unlimited adding ${
               this.props.permanentClickerValue
             } point per second`}
             cost={PERMANET_CLICKER_COST}

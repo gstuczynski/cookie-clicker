@@ -1,6 +1,15 @@
 .cookie {
   display: flex;
   flex-flow: column;
+  width: 70vw;
+  border: 1px solid;
+  height: 55vh ;
+}
+
+.gamebtn {
+  margin: 10px;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .timer {
@@ -11,16 +20,16 @@
 .cookieButton {
   background: url("../assets/cookie.png");
   background-size: cover;
-  width: 300px;
-  height: 300px;
+  width: 280px;
+  height: 280px;
   border: none;
   margin: 0 auto;
   cursor: pointer;
 }
 
 .cookieButton:hover {
-  width: 350px;
-  height: 350px;
+  width: 320px;
+  height: 320px;
 }
 
 .cookieButton:active {

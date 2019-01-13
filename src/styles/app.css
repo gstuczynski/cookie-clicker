@@ -7,11 +7,15 @@
   display: flex
 }
 
+.gameboard {
+  display: flex
+}
+
 @media only screen and (max-width: 600px) {
   .dashboard{
     flex-flow: column
   }
-  .cookieWrapper{
+  .gameboard{
     order: -1
   }
 }

@@ -16,12 +16,12 @@ const Stats = ({
     <ul className="list-group">
       <li className="list-group-item">Points: {points}</li>
       <li className="list-group-item">
-        Current avarage point gained time: {avarageClickTime}
+        Current speed (1p/s): {avarageClickTime}
       </li>
       <li className="list-group-item">Level: {level}</li>
       <li className="list-group-item">Points per click: {clickValue}</li>
       <li className="list-group-item">
-        Best average point gained time: {maxAvarageClickTime}
+        Best speed (1p/s): {maxAvarageClickTime}
       </li>
     </ul>
   </div>

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { func, number, instanceOf, string } from "prop-types";
 import { connect } from "react-redux";
-import * as actionTypes from "../store/actionTypes";
 import _ from "underscore";
+import SaveScoreModal from "./SaveScoreModal";
+import * as actionTypes from "../store/actionTypes";
 import "../styles/cookie.css";
 
 class Cookie extends Component {
@@ -12,7 +13,11 @@ class Cookie extends Component {
     clickValue: number.isRequired,
     saveStartGameTime: func.isRequired,
     startGameTime: string, // instanceOf(Date),
-    clearStorage: func.isRequired
+    clearStorage: func.isRequired,
+    level: number.isRequired,
+    updateAvarageClickTime: func.isRequired,
+    avarageClickTime: number.isRequired,
+    maxAvarageClickTime: number.isRequired
   };
 
   static defaultProps = {
@@ -25,7 +30,8 @@ class Cookie extends Component {
     let state = {
       elapsed: 0,
       cookieDisabled: true,
-      cookieClicked: false
+      cookieClicked: false,
+      saveScoreModalIsOpen: false
     };
 
     if (this.props.startGameTime) {
@@ -63,20 +69,31 @@ class Cookie extends Component {
   onFinishGame = () => {
     this.props.clearStorage();
     clearInterval(this.timer);
-    this.setState({ elapsed: 0, cookieDisabled: true });
+    this.setState({
+      elapsed: 0,
+      cookieDisabled: true,
+      saveScoreModalIsOpen: false
+    });
   };
 
   render() {
+    const {
+      level,
+      points,
+      updateAvarageClickTime,
+      avarageClickTime,
+      maxAvarageClickTime
+    } = this.props;
     let pointGainSpeed = 0;
     let seconds = 0;
 
     if (this.state.elapsed) {
       let elapsed = Math.round(this.state.elapsed / 100);
       seconds = (elapsed / 10).toFixed(1);
-      pointGainSpeed = (seconds ? this.props.points / seconds : 0).toFixed(1);
+      pointGainSpeed = (seconds ? points / seconds : 0).toFixed(1);
     }
     // I'm not sure if update global state that often is good idea - will testing.
-    this.props.updateAvarageClickTime(pointGainSpeed);
+    updateAvarageClickTime(pointGainSpeed);
     // if (seconds > 0 && seconds % 10 === 0) {
     //   this.props.updateAvarageClickTime(this.props.points / seconds);
     // }
@@ -87,11 +104,15 @@ class Cookie extends Component {
         <button
           disabled={!this.state.cookieDisabled}
           onClick={this.onStartGame}
-          className="btn btn-success"
+          className="btn btn-success gamebtn"
         >
           Start Game
         </button>
-        <button onClick={this.onFinishGame} className="btn btn-danger">
+        <button
+          disabled={this.state.cookieDisabled}
+          onClick={() => this.setState({ saveScoreModalIsOpen: true })}
+          className="btn btn-danger gamebtn"
+        >
           Finish Game
         </button>
         <button
@@ -99,6 +120,18 @@ class Cookie extends Component {
           className="cookieButton"
           onClick={this.onCookieClick}
         />
+        {this.state.saveScoreModalIsOpen && (
+          <SaveScoreModal
+            isOpen={this.state.saveScoreModalIsOpen}
+            onClose={this.onFinishGame}
+            score={{
+              level: level,
+              points: points,
+              avgPointsGainedOnFinish: avarageClickTime,
+              bestAvgPoinsGainedTime: maxAvarageClickTime
+            }}
+          />
+        )}
       </div>
     );
   }
@@ -107,9 +140,11 @@ class Cookie extends Component {
 const mapStateToProps = state => {
   return {
     points: state.points,
+    level: state.level,
     avarageClickTime: state.avarageClickTime,
     clickValue: state.clickValue,
-    startGameTime: state.startGameTime
+    startGameTime: state.startGameTime,
+    maxAvarageClickTime: state.maxAvarageClickTime
   };
 };
 

@@ -1,9 +1,10 @@
 import React from "react";
 import Modal from "react-modal";
 import axios from "axios";
+import config from "../config.json";
 import { func, bool, number, shape, string } from "prop-types";
 
-const BACKEND_URL = "http://localhost:3001/save-score";
+const BACKEND_URL = `${config.backend_url}/panteon`;
 
 const customStyles = {
   content: {

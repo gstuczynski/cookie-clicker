@@ -9,7 +9,7 @@ const LevelAchievement = props => {
   const progressPercent = (currentLevel * 100) / achievementLevel;
   return (
     <div className="achievement">
-      {currentLevel >= achievementLevel && <img src={tick} />}
+      {currentLevel >= achievementLevel && <img src={tick} alt="tick" />}
       <div className="progress">
         <div
           className={"progress-bar"}

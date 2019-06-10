@@ -5,7 +5,11 @@ import unlocked from "../../assets/unlocked.png";
 
 const ClickerBonus = ({ active, text, onClick, cost }) => (
   <button disabled={!active} onClick={onClick} className="btn btn-primary">
-    {!active ? <img src={locked} /> : <img src={unlocked} />}
+    {!active ? (
+      <img src={locked} alt="locked" />
+    ) : (
+      <img src={unlocked} alt="unlocked" />
+    )}
     {text}
     <span style={{ color: "red" }}>Cost {cost}</span>
   </button>

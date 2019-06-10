@@ -18,7 +18,7 @@
 }
 
 .cookieButton {
-  background: url("https://gstuczynski.pl/api/cookie-clicker/cookie.png");
+  background: url("https://gstuczynski.com/api/cookie-clicker/cookie.png");
   background-size: cover;
   width: 280px;
   height: 280px;
@@ -39,7 +39,7 @@
 }
 
 .smallCookie {
-  background: url("https://gstuczynski.pl/api/cookie-clicker/cookie.png");
+  background: url("https://gstuczynski.com/api/cookie-clicker/cookie.png");
   background-size: contain;
   width: 40px;
   height: 40px;

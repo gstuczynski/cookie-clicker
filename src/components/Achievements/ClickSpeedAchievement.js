@@ -40,7 +40,7 @@ class ClickSpeedAchievement extends Component {
 
     return (
       <div className="achievement">
-        {achievementUnlocked && <img src={tick} />}
+        {achievementUnlocked && <img src={tick} alt="tick" />}
         {achievementUnlocked &&
           this.state.showInfoTime &&
           !this.state.unlocked > 0 && (

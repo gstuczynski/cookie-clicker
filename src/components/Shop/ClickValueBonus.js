@@ -5,7 +5,11 @@ import unlocked from "../../assets/unlocked.png";
 
 const ClickValueBonus = ({ active, value, onClick }) => (
   <button disabled={active} onClick={onClick} className="btn btn-primary">
-    {active ? <img src={locked} /> : <img src={unlocked} />}
+    {active ? (
+      <img src={locked} alt="locked" />
+    ) : (
+      <img src={unlocked} alt="unloacked" />
+    )}
     Each click will be be worth {value + 1}
   </button>
 );

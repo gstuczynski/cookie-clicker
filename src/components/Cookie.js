@@ -91,11 +91,10 @@ class Cookie extends Component {
       seconds = (elapsed / 10).toFixed(1);
       pointGainSpeed = (seconds ? points / seconds : 0).toFixed(1);
     }
-    // I'm not sure if update global state that often is good idea - will testing.
-    updateAvarageClickTime(parseFloat(pointGainSpeed));
-    // if (seconds > 0 && seconds % 10 === 0) {
-    //   this.props.updateAvarageClickTime(this.props.points / seconds);
-    // }
+
+    if (parseFloat(pointGainSpeed) !== avarageClickTime) {
+      updateAvarageClickTime(parseFloat(pointGainSpeed));
+    }
 
     return (
       <div className="cookie">
